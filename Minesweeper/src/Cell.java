@@ -32,7 +32,7 @@ public class Cell {
         return adjacentMines;
     }
 
-    public void incrementAdjacentMines() {
-        this.adjacentMines++;
+    public void incrementAdjacentMines(int count) {
+        this.adjacentMines = count;
     }
 }
