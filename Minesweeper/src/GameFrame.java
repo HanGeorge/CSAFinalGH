@@ -83,9 +83,19 @@ public class GameFrame extends JFrame {
                 if (board.isRevealed(row, col)) {
                     if (board.isMine(row, col)) {
                         // IMAGE OF MINE HERE
-                        buttons[row][col].setText("M");
+                        ImageIcon mineIcon = new ImageIcon("2454188.png"); // Replace with your mine image path
+                        buttons[row][col].setIcon(mineIcon);
+                        //buttons[row][col].setText("M");
                     } else {
-                        buttons[row][col].setText(String.valueOf(board.getAdjacentMines(row, col)));
+                        int adjacentMines = board.getAdjacentMines(row, col);
+                        if (adjacentMines > 0) {
+                            buttons[row][col].setText(String.valueOf(adjacentMines));
+                            // Optionally, you can set an image for the number
+                            // ImageIcon numberIcon = new ImageIcon("path/to/number/image.png"); // Replace with your number image path
+                            // buttons[row][col].setIcon(numberIcon);
+                        } else {
+                            buttons[row][col].setText("");
+                        }
                     }
                     buttons[row][col].setEnabled(false);
                 }
@@ -100,7 +110,9 @@ public class GameFrame extends JFrame {
         for (int row = 0; row < board.rows; row++) {
             for (int col = 0; col < board.cols; col++) {
                 if (board.isMine(row, col)) {
-                    // IMAGE OF MINE HERE
+                    // Set an image for the mine
+                    //ImageIcon mineIcon = new ImageIcon("2454188.png"); // Replace with your mine image path
+                    //buttons[row][col].setIcon(mineIcon);
                     buttons[row][col].setText("M");
                 }
                 buttons[row][col].setEnabled(false);
