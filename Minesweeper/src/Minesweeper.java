@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 /**
  * Main class to run the Minesweeper game.
  */
@@ -7,8 +9,10 @@ public class Minesweeper {
      * @param args command-line arguments
      */
     public static void main(String[] args) {
-        MinesweeperBoard gameBoard = new MinesweeperBoard(10, 10, 10);
-        Game game = new Game(gameBoard);
-        game.play();
+        SwingUtilities.invokeLater(() -> {
+            MinesweeperBoard gameBoard = new MinesweeperBoard(10, 10, 10);
+            GameFrame gameFrame = new GameFrame(gameBoard);
+            gameFrame.setVisible(true);
+        });
     }
 }

@@ -1,6 +1,3 @@
-/**
- * Cell class representing each cell in the Minesweeper grid.
- */
 public class Cell {
     private boolean isMine;
     private boolean isRevealed;

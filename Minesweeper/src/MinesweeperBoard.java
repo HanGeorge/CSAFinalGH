@@ -1,8 +1,4 @@
-/**
- * MinesweeperBoard class extending the generic Board class to add Minesweeper-specific functionality.
- */
 import java.util.Random;
-
 public class MinesweeperBoard extends Board {
     private int totalMines;
 

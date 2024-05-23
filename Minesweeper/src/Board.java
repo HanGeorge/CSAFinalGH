@@ -1,6 +1,3 @@
-/**
- * Abstract class representing a generic game board.
- */
 public abstract class Board {
     protected Cell[][] cells;
     protected int rows;
@@ -66,31 +63,5 @@ public abstract class Board {
 
     public int getAdjacentMines(int row, int col) {
         return cells[row][col].getAdjacentMines();
-    }
-
-    /**
-     * Displays the current state of the board.
-     */
-    public void displayBoard() {
-        System.out.print("  ");
-        for (int col = 0; col < cols; col++) {
-            System.out.print(col + " ");
-        }
-        System.out.println();
-        for (int row = 0; row < rows; row++) {
-            System.out.print(row + " ");
-            for (int col = 0; col < cols; col++) {
-                if (cells[row][col].isRevealed()) {
-                    if (cells[row][col].isMine()) {
-                        System.out.print("M ");
-                    } else {
-                        System.out.print(cells[row][col].getAdjacentMines() + " ");
-                    }
-                } else {
-                    System.out.print("* ");
-                }
-            }
-            System.out.println();
-        }
     }
 }
