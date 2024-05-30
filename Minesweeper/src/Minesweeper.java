@@ -1,8 +1,8 @@
 import javax.swing.*;
 
-/**
- * Main class to run the Minesweeper game.
- */
+
+ //Main class to run the Minesweeper game.
+
 public class Minesweeper {
     /**
      * Main method to start the Minesweeper game.

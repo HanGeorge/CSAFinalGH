@@ -3,9 +3,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * GameFrame class to create the GUI for the Minesweeper game.
- */
+
+  //GameFrame class to create the GUI for the Minesweeper game.
+
 public class GameFrame extends JFrame {
     private MinesweeperBoard board;
     private JButton[][] buttons;
@@ -13,7 +13,6 @@ public class GameFrame extends JFrame {
 
     /**
      * Constructor for GameFrame.
-     *
      * @param board the MinesweeperBoard to use
      */
     public GameFrame(MinesweeperBoard board) {
@@ -22,9 +21,9 @@ public class GameFrame extends JFrame {
         initializeFrame();
     }
 
-    /**
-     * Initializes the game frame and adds components.
-     */
+
+     //Initializes the game frame and adds components.
+
     private void initializeFrame() {
         setTitle("Minesweeper");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,22 +34,22 @@ public class GameFrame extends JFrame {
         for (int row = 0; row < board.rows; row++) {
             for (int col = 0; col < board.cols; col++) {
                 buttons[row][col] = new JButton();
+                buttons[row][col].setPreferredSize(new Dimension(60, 58)); // Set preferred size
                 buttons[row][col].addActionListener(new CellClickListener(row, col));
                 add(buttons[row][col]);
             }
         }
     }
 
-    /**
-     * Inner class to handle cell clicks.
-     */
+
+     //Inner class to handle cell clicks.
+
     private class CellClickListener implements ActionListener {
         private int row;
         private int col;
 
         /**
          * Constructor for CellClickListener.
-         *
          * @param row row index
          * @param col column index
          */
@@ -69,30 +68,30 @@ public class GameFrame extends JFrame {
                 } else {
                     board.revealCell(row, col);
                     updateButtons();
+                    if (checkWinCondition()) {
+                        isGameOver = true;
+                        JOptionPane.showMessageDialog(GameFrame.this, "Congratulations! You've cleared all non-mine cells.");
+                    }
                 }
             }
         }
     }
 
-    /**
-     * Updates the button text based on the board state.
-     */
+
+     //Updates the button text based on the board state.
     private void updateButtons() {
         for (int row = 0; row < board.rows; row++) {
             for (int col = 0; col < board.cols; col++) {
                 if (board.isRevealed(row, col)) {
                     if (board.isMine(row, col)) {
-                        // IMAGE OF MINE HERE
-                        ImageIcon mineIcon = new ImageIcon("2454188.png"); // Replace with your mine image path
+
+                        ImageIcon mineIcon = loadImage("src/file.png" ); // Replace with your mine image path
                         buttons[row][col].setIcon(mineIcon);
-                        //buttons[row][col].setText("M");
+                        //buttons[row][col].setText("M"); for testing
                     } else {
                         int adjacentMines = board.getAdjacentMines(row, col);
                         if (adjacentMines > 0) {
                             buttons[row][col].setText(String.valueOf(adjacentMines));
-                            // Optionally, you can set an image for the number
-                            // ImageIcon numberIcon = new ImageIcon("path/to/number/image.png"); // Replace with your number image path
-                            // buttons[row][col].setIcon(numberIcon);
                         } else {
                             buttons[row][col].setText("");
                         }
@@ -103,20 +102,44 @@ public class GameFrame extends JFrame {
         }
     }
 
-    /**
-     * Reveals all mines when the game is over.
-     */
+
+     //Reveals all mines when the game is over.
+
     private void revealMines() {
         for (int row = 0; row < board.rows; row++) {
             for (int col = 0; col < board.cols; col++) {
                 if (board.isMine(row, col)) {
                     // Set an image for the mine
-                    //ImageIcon mineIcon = new ImageIcon("2454188.png"); // Replace with your mine image path
-                    //buttons[row][col].setIcon(mineIcon);
-                    buttons[row][col].setText("M");
+                    ImageIcon mineIcon = loadImage("src/file.png" ); // Replace with your mine image path
+                    buttons[row][col].setIcon(mineIcon);
+                    //buttons[row][col].setText("M"); for testing
                 }
                 buttons[row][col].setEnabled(false);
             }
         }
     }
+    private boolean checkWinCondition() {
+        for (int row = 0; row < board.rows; row++) {
+            for (int col = 0; col < board.cols; col++) {
+                if (!board.isMine(row, col) && !board.isRevealed(row, col)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Loads an image and prints an error message if the image fails to load.
+     * @param path the path to the image file
+     * @return the ImageIcon if loaded successfully, null otherwise
+     */
+    private ImageIcon loadImage(String path) {
+        ImageIcon icon = new ImageIcon(path);
+        if (icon.getIconWidth() == -1) {
+            System.out.println("Error: Could not load image at " + path);
+        }
+        return icon;
+    }
+
 }

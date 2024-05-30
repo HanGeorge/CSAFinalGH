@@ -19,9 +19,9 @@ public abstract class Board {
         }
     }
 
-    /**
-     * Abstract method to initialize the board.
-     */
+
+     //Abstract method to initialize the board.
+
     public abstract void initializeBoard();
 
     /**

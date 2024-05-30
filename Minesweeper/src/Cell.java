@@ -3,9 +3,9 @@ public class Cell {
     private boolean isRevealed;
     private int adjacentMines;
 
-    /**
-     * Constructor for Cell.
-     */
+
+     //Constructor for Cell.
+
     public Cell() {
         this.isMine = false;
         this.isRevealed = false;
