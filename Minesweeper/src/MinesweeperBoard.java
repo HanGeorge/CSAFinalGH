@@ -24,9 +24,9 @@ public class MinesweeperBoard extends Board {
         calculateAdjacentMines();
     }
 
-    /**
-     * Places mines randomly on the board.
-     */
+
+     //Places mines randomly on the board.
+
     private void placeMines() {
         Random random = new Random();
         int placedMines = 0;
@@ -40,9 +40,8 @@ public class MinesweeperBoard extends Board {
         }
     }
 
-    /**
-     * Calculates the number of adjacent mines for each cell.
-     */
+
+     // Calculates the number of adjacent mines for each cell.
     private void calculateAdjacentMines() {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
